@@ -132,6 +132,11 @@ class HomeController extends Controller
 
     public function deleteStudent(Request $request){
         $this->students=StudentInfo::find($request->student_id);
+
+        if($this->students->image !== null){
+            unlink($this->students->image );
+        }
+        
         $this->students->delete();
 
         return redirect(route('manage.student'));
